@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Genymotion" verbose="1" parallel="tests" thread-count="2">
+    <test name="Test on First Machine">
+        <parameter name="udid" value="emulator-5554"/>
+        <parameter name="systemPort" value="8200"/>
+        <parameter name="deviceIndex" value="0"/>
+        <classes>
+          <class name="tests.SetHotelTest"/>
+          <class name="tests.LoginTest"/>
+        </classes>
+
+    </test>
+    <test name="Test on Second Machine">
+
+        <parameter name="udid" value="emulator-5556"/>
+        <parameter name="systemPort" value="8201"/>
+        <parameter name="deviceIndex" value="0"/>
+        <classes>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+</suite>
