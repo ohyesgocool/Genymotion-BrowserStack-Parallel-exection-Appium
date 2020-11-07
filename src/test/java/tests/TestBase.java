@@ -2,7 +2,6 @@ package tests;
 
 import java.net.URL;
 import java.util.Map;
-import java.util.Iterator;
 import java.io.FileReader;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -36,28 +35,29 @@ public class TestBase {
     protected WebDriverWait wait;
 
     protected AndroidDriver<AndroidElement> driver;
+    DesiredCapabilities capabilities;
+
+    public void setDesiredCapabilitiesForBrowserStack(Map<String, String> map) {
+
+        map.entrySet().stream().
+                forEach(e ->capabilities.setCapability(e.getKey().toString(), e.getValue().toString()) );
+
+
+    }
+
+
     public AndroidDriver<AndroidElement> runOnBrowserStack(String deviceIndex) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONObject config = (JSONObject) parser.parse(new FileReader("src/test/java/resources/browserstackparallel.conf.json"));
         JSONArray envs = (JSONArray) config.get("environments");
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
 
         Map<String, String> envCapabilities = (Map<String, String>) envs.get(Integer.parseInt(deviceIndex));
-        Iterator it = envCapabilities.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
-        }
+        setDesiredCapabilitiesForBrowserStack(envCapabilities);
 
         Map<String, String> commonCapabilities = (Map<String, String>) config.get("capabilities");
-        it = commonCapabilities.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            if(capabilities.getCapability(pair.getKey().toString()) == null){
-                capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
-            }
-        }
+        setDesiredCapabilitiesForBrowserStack(commonCapabilities);
+
 
         String username = System.getenv("BROWSERSTACK_USERNAME");
         if(username == null) {
@@ -83,13 +83,11 @@ public class TestBase {
     public AndroidDriver<AndroidElement> runOnLocalEmulators(String udid, String systemPort) throws IOException {
 
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+
 
         PropertyReader propertyReader = new PropertyReader();
         File f = new File("app");
         File fs = new File(f, propertyReader.getGlobalValue("APP_NAME"));
-
-        // capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, propertyReader.getGlobalValue("DEVICE_NAME"));
 
         capabilities.setCapability(MobileCapabilityType.APP, fs.getAbsolutePath());
         capabilities.setCapability("appActivity ", propertyReader.getGlobalValue("appActivity"));

@@ -5,7 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HotelPage;
 
-import java.io.IOException;
 
 public class SetHotelTest extends TestBase{
 
