@@ -1,0 +1,8 @@
+{
+  "server": "127.0.0.1:4723",
+  "capabilities": {
+    "MobileCapabilityType.UDID": "udid",
+    "AndroidMobileCapabilityType.SYSTEM_PORT": "SystemPort",
+    "appActivity": "com.cleartrip.android"
+  }
+}

@@ -1,17 +1,11 @@
 package tests;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.ActivitiesPage;
 
 
 public class BookProductCardTest extends TestBase {
-
-    AndroidDriver<AndroidElement> driver;
-
-
 
     @Test(priority = 1)
     public void ProductCardTextTest()

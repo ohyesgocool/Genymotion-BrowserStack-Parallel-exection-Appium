@@ -1,7 +1,5 @@
 package tests;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidElement;
 import org.testng.Assert;
 
 import org.testng.annotations.Test;
@@ -9,9 +7,8 @@ import pages.LoginPage;
 import resources.Constants;
 
 
-public class LoginTest extends TestBase {
 
-    AndroidDriver<AndroidElement> driver;
+public class LoginTest extends TestBase {
 
 
     @Test(priority = 1)

@@ -5,8 +5,8 @@
         <parameter name="systemPort" value="8200"/>
         <parameter name="deviceIndex" value="0"/>
         <classes>
-          <class name="tests.SetHotelTest"/>
-          <class name="tests.LoginTest"/>
+          <class name="tests.FlightBookingTest"/>
+
         </classes>
 
     </test>
@@ -16,7 +16,7 @@
         <parameter name="systemPort" value="8201"/>
         <parameter name="deviceIndex" value="0"/>
         <classes>
-            <class name="tests.LoginTest"/>
+            <class name="tests.SetHotelTest"/>
         </classes>
     </test>
 </suite>
