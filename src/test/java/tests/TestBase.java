@@ -18,7 +18,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -36,6 +35,17 @@ public class TestBase {
 
     protected AndroidDriver<AndroidElement> driver;
 
+    public DesiredCapabilities setCapability(Map<String, String> map , DesiredCapabilities capabilities){
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
+        }
+        return capabilities;
+
+
+    }
+
 
     public AndroidDriver<AndroidElement> runOnBrowserStack(String deviceIndex) throws IOException, ParseException {
 
@@ -46,47 +56,19 @@ public class TestBase {
 
 
         Map<String, String> envCapabilities = (Map<String, String>) envs.get(Integer.parseInt(deviceIndex));
-        Iterator it = envCapabilities.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
-        }
-
+        setCapability(envCapabilities ,capabilities );
 
         Map<String, String> commonCapabilities = (Map<String, String>) config.get("capabilities");
-       it = commonCapabilities.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            capabilities.setCapability(pair.getKey().toString(), pair.getValue().toString());
-        }
+        setCapability(commonCapabilities ,capabilities );
+        capabilities.setCapability("app", System.getenv("BROWSERSTACK_APP_ID"));
 
-
-        String username = System.getenv("BROWSERSTACK_USERNAME");
-        if(username == null) {
-            username = (String) config.get("username");
-        }
-
-        String accessKey = System.getenv("BROWSERSTACK_ACCESS_KEY");
-        if(accessKey == null) {
-            accessKey = (String) config.get("access_key");
-        }
-        System.out.println("http://"+username+":"+accessKey+"@"+config.get("server")+"/wd/hub");
-
-       String app = System.getenv("BROWSERSTACK_APP_ID");
-        if(app != null && !app.isEmpty()) {
-            capabilities.setCapability("app", app);
-        }
-    System.out.println("http://"+username+":"+accessKey+"@"+config.get("server")+"/wd/hub");
-        driver = new AndroidDriver(new URL("http://"+username+":"+accessKey+"@"+config.get("server")+"/wd/hub"), capabilities);
+        driver = new AndroidDriver(new URL("http://"+(String) config.get("username")+":"+(String) config.get("access_key")+"@"+config.get("server")+"/wd/hub"), capabilities);
         return driver;
 
 
     }
 
     public AndroidDriver<AndroidElement> runOnLocalEmulators(String udid, String SystemPort) throws IOException {
-
-
-
 
         PropertyReader propertyReader = new PropertyReader();
         File f = new File("app");

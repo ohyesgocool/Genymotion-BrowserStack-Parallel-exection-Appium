@@ -24,7 +24,7 @@ public class FlightBookingTest extends TestBase {
     @Test(priority = 3)
     public void sortPriceOnFlightListTest(){
         FlightsPage flightsPage=new FlightsPage(driver);
-        flightsPage.sortPrice();
+       // flightsPage.sortPrice();
 
     }
 
