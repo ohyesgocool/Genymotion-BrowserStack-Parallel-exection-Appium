@@ -14,7 +14,7 @@
 
         <parameter name="udid" value="emulator-5556"/>
         <parameter name="systemPort" value="8201"/>
-        <parameter name="deviceIndex" value="0"/>
+        <parameter name="deviceIndex" value="1"/>
         <classes>
             <class name="tests.SetHotelTest"/>
         </classes>

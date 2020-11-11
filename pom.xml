@@ -7,33 +7,9 @@
     <groupId>org.example</groupId>
     <artifactId>Genymotion</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>6</source>
-                    <target>6</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
     <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
-        </dependency>
+
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
@@ -49,6 +25,16 @@
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.testvagrant.optimuscloud</groupId>
+            <artifactId>optimus-monitor</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.testvagrant.optimuscloud</groupId>
+            <artifactId>java-client</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>

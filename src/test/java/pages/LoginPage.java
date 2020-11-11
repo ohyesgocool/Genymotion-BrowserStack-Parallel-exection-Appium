@@ -39,6 +39,7 @@ public class LoginPage extends BasePage{
         waitAndClick(signInButton);
         waitForElement(userNameButton).sendKeys(userName);
         waitForElement(passwordButton).sendKeys(password);
+        hideKeyboard();
         waitAndClick(performSiginIn);
         return waitForElement(displayEmail).getText();
 
